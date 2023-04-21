@@ -4,8 +4,6 @@ import { getLesson } from '../../api/newCourses';
 import { CourseLessons } from '../../types/CourseLessons';
 import { BackButton } from '../BackButton';
 import { Error } from '../Error';
-import { Footer } from '../Footer/Footer';
-import { Header } from '../Header/Header';
 import { ActiveCourse } from '../ActiveCourse/ActiveCourse';
 import { Loader } from '../Loader';
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
@@ -35,28 +33,22 @@ export const CoursePage: React.FC = () => {
   }, [activeCourseItem]);
 
   return (
-    <>
-      <Header />
+    <div className="container">
+      <>
+        {!activeCourse && !error
+          ? <Loader />
+          : (
+            <>
+              <Breadcrumbs activeCourse={activeCourse} />
 
-      <div className="container">
-        <>
-          {!activeCourse && !error
-            ? <Loader />
-            : (
-              <>
-                <Breadcrumbs activeCourse={activeCourse} />
+              <BackButton />
 
-                <BackButton />
+              {error && <Error />}
 
-                {error && <Error />}
-
-                {activeCourse && <ActiveCourse activeCourse={activeCourse} />}
-              </>
-            )}
-        </>
-      </div>
-
-      <Footer />
-    </>
+              {activeCourse && <ActiveCourse activeCourse={activeCourse} />}
+            </>
+          )}
+      </>
+    </div>
   );
 };

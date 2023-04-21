@@ -7,21 +7,13 @@ const TOKEN_URL
 const BASE_URL
   = `${host}/${version}/core/preview-courses`;
 
-function wait(delay: number) {
-  return new Promise(resolve => {
-    setTimeout(resolve, delay);
-  });
-}
-
 const getToken = () => {
   return fetch(TOKEN_URL).then(response => response.json());
 };
 
 async function request<T>(lessonId: string): Promise<T> {
-  const token = await getToken();
-
-  return wait(300)
-    .then(() => fetch(
+  return getToken()
+    .then((token) => fetch(
       !lessonId
         ? BASE_URL
         : `${BASE_URL}/${lessonId}`,

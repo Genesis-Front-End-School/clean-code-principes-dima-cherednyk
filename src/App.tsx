@@ -6,11 +6,14 @@ import { HomeTaskPage } from './components/HomeTaskPage/HomeTaskPage';
 import { NotFoundPage } from './components/NotFoundPage';
 import { NotImplementedPage } from './components/NotImplementedPage';
 import { CoursePage } from './components/CoursePage/CoursePage';
+import { Footer, Header } from './components';
 import './App.scss';
 
 export const App: React.FC = () => {
   return (
     <div className="App">
+      <Header />
+
       <Routes>
         <Route
           path="*"
@@ -20,11 +23,10 @@ export const App: React.FC = () => {
         <Route path="/courses">
           <Route
             index
-            path="/courses"
             element={<CoursesPage />}
           />
           <Route
-            path="/courses/:slug"
+            path=":slug"
             element={<CoursePage />}
           />
         </Route>
@@ -46,6 +48,8 @@ export const App: React.FC = () => {
           element={<NotImplementedPage />}
         />
       </Routes>
+
+      <Footer />
     </div>
   );
 };

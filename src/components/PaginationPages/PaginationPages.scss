@@ -1,0 +1,37 @@
+.paginationPages {
+  display: flex;
+  gap: 8px;
+
+  &__page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    outline: none;
+    border: 1px solid #e2e6e9;
+    font-family: "Montserrat", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #000;
+    cursor: pointer;
+    background-color: white;
+
+    &:hover {
+      border: 1px solid #313237;
+    }
+
+    &--isActive {
+      border: none;
+      background: #313237;
+      color: white;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    align-items: flex-end;
+  }
+}

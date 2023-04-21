@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import ReactHLS from 'react-hls';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { CourseLessons } from '../../types/CourseLessons';
-import { Lesson } from '../../types/Lesson';
 import { actions as actualLessonActions } from '../../features/actualLesson';
 import './ActiveCourse.scss';
 
@@ -31,26 +30,20 @@ export const ActiveCourse: React.FC<Props> = ({ activeCourse }) => {
     }, 5000);
   };
 
-  const checkLink = (lesson: Lesson) => {
-    if (lesson.link) {
-      dispatch(actualLessonActions.setActualLesson(lesson));
-    } else {
-      dispatch(actualLessonActions.setActualLesson(lesson));
-    }
-  };
-
   const checkVideo = () => {
     return activeCourse.lessons.some(item => item.link === actualLesson?.link)
       ? actualLesson?.link
       : null;
   };
 
+  const activeLesson = activeCourse.lessons.find(item => item.order === 1)?.link;
+
   return (
     <div className="activeCourse">
-      {checkVideo() || activeCourse.lessons.find(item => item.order === 1)?.link
+      {checkVideo() || activeLesson
         ? (
           <ReactHLS
-            url={checkVideo() || activeCourse.lessons.find(item => item.order === 1)?.link}
+            url={checkVideo() || activeLesson}
           />
         )
         : (
@@ -81,7 +74,7 @@ export const ActiveCourse: React.FC<Props> = ({ activeCourse }) => {
                 onClick={() => {
                   return lesson.status === 'locked'
                     ? lockedLessonMessage(lesson.id)
-                    : checkLink(lesson);
+                    : dispatch(actualLessonActions.setActualLesson(lesson));
                 }}
               >
                 {`${lesson.order}. ${lesson.title}`}
