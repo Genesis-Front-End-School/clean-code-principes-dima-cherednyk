@@ -1,1 +1,9 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/_2xjYeZK)
+# React TypeScript Starter Pack
+
+To use this template click `Use this template`
+
+### Available Scripts
+
+`Deploy` - available to deploy your application to gh-pages
+
+`SCSS Preprocessor` - available to write your styles with modern style language

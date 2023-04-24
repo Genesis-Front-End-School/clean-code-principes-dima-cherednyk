@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    width: 32px;
+    border: 1px solid #b4bdc4;
+    background-color: white;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid #313237;
+    }
+
+    &--disabled {
+      border: 1px solid #e2e6e9;
+      cursor: default;
+
+      &:hover {
+        border: 1px solid #e2e6e9;
+      }
+    }
+  }
+}
