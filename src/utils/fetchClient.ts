@@ -11,7 +11,7 @@ const getToken = () => {
   return fetch(TOKEN_URL).then(response => response.json());
 };
 
-async function request<T>(lessonId: string): Promise<T> {
+function request<T>(lessonId: string): Promise<T> {
   return getToken()
     .then((token) => fetch(
       !lessonId

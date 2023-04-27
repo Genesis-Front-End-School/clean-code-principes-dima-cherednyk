@@ -14,4 +14,6 @@ export { NotFoundPage } from './NotFoundPage';
 export { NotImplementedPage } from './NotImplementedPage';
 export { PageNavLink } from './PageNavLink';
 export { Pagination } from './Pagination';
+export { PaginationPages } from './PaginationPages';
 export { Breadcrumbs } from './Breadcrumbs';
+export { NetworkError } from './NetworkError';

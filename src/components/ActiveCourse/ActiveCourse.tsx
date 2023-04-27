@@ -2,23 +2,28 @@ import classNames from 'classnames';
 import React, { useState } from 'react';
 import ReactHLS from 'react-hls';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { CourseLessons } from '../../types/CourseLessons';
 import { actions as actualLessonActions } from '../../features/actualLesson';
+import { Lesson } from '../../types/Lesson';
 import './ActiveCourse.scss';
 
 type Props = {
-  activeCourse: CourseLessons | null,
+  lessons: Lesson[],
+  title: string,
+  description: string,
 };
 
-export const ActiveCourse: React.FC<Props> = ({ activeCourse }) => {
+export const ActiveCourse: React.FC<Props> = (
+  {
+    lessons,
+    title,
+    description,
+  },
+) => {
   const [lockedMessage, setLockedMessage] = useState<boolean>(false);
   const [lockedLessonId, setLockedLesonId] = useState<string>('');
   const { actualLesson } = useAppSelector(state => state.actualLesson);
+  const activeLesson = lessons.find(item => item.order === 1)?.link;
   const dispatch = useAppDispatch();
-
-  if (!activeCourse) {
-    return null;
-  }
 
   const lockedLessonMessage = (lessonId: string) => {
     setLockedMessage(true);
@@ -31,12 +36,10 @@ export const ActiveCourse: React.FC<Props> = ({ activeCourse }) => {
   };
 
   const checkVideo = () => {
-    return activeCourse.lessons.some(item => item.link === actualLesson?.link)
+    return lessons.some(item => item.link === actualLesson?.link)
       ? actualLesson?.link
       : null;
   };
-
-  const activeLesson = activeCourse.lessons.find(item => item.order === 1)?.link;
 
   return (
     <div className="activeCourse">
@@ -49,20 +52,20 @@ export const ActiveCourse: React.FC<Props> = ({ activeCourse }) => {
         : (
           <img
             className="activeCourse__image"
-            src={(actualLesson && `${actualLesson?.previewImageLink}/lesson-${actualLesson?.order}.webp`) || `${activeCourse.lessons.find(item => item.order === 1)?.previewImageLink}/lesson-1.webp`}
+            src={(actualLesson && `${actualLesson?.previewImageLink}/lesson-${actualLesson?.order}.webp`) || `${lessons.find(item => item.order === 1)?.previewImageLink}/lesson-1.webp`}
             alt="previewImage"
           />
         )}
 
       <div className="activeCourse__info">
-        <h1>{activeCourse.title}</h1>
+        <h1>{title}</h1>
 
-        <p>{activeCourse.description}</p>
+        <p>{description}</p>
 
         <p>Lessons:</p>
 
         <ul className="activeCourse__lessons">
-          {activeCourse.lessons.sort((a, b) => a.order - b.order).map(lesson => (
+          {lessons.sort((a, b) => a.order - b.order).map(lesson => (
             <li className="activeCourse__lesson" key={lesson.id}>
               <button
                 className={classNames(

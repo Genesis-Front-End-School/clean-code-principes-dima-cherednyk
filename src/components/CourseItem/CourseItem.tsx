@@ -2,36 +2,50 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { Course } from '../../types/Course';
 import { actions as actualCourseActions } from '../../features/actualCourse';
 import './CourseItem.scss';
+import { CourseMeta } from '../../types/CourseMeta';
 
 type Props = {
-  course: Course,
+  title: string,
+  lessonsCount: number,
+  previewImageLink: string,
+  rating: number,
+  meta: CourseMeta,
+  id: string,
 };
 
-export const CourseItem: React.FC<Props> = ({ course }) => {
+export const CourseItem: React.FC<Props> = (
+  {
+    title,
+    lessonsCount,
+    previewImageLink,
+    rating,
+    meta,
+    id,
+  },
+) => {
   const actualCourse = useAppSelector(state => state.actualCourse);
   const dispatch = useAppDispatch();
 
   return (
     <div className="courseItem">
-      <img className="courseItem__image" src={`${course.previewImageLink}/cover.webp`} alt="product" />
+      <img className="courseItem__image" src={`${previewImageLink}/cover.webp`} alt="product" />
 
-      <h4 className="courseItem__name">{course.title}</h4>
+      <h4 className="courseItem__name">{title}</h4>
 
       <div className="courseItem__info">
-        <p>{`Lessons: ${course.lessonsCount}`}</p>
-        <p>{`Rating: ${course.rating}/5`}</p>
+        <p>{`Lessons: ${lessonsCount}`}</p>
+        <p>{`Rating: ${rating}/5`}</p>
       </div>
 
-      {course.meta.skills
+      {meta.skills
         ? (
           <>
             <p className="courseItem__skills">Skills:</p>
 
             <ul className="courseItem__skillsList">
-              {course.meta.skills.map(skill => (
+              {meta.skills.map(skill => (
                 <li className="courseItem__skillItem" key={skill}>{skill}</li>
               ))}
             </ul>
@@ -42,13 +56,13 @@ export const CourseItem: React.FC<Props> = ({ course }) => {
       <Link
         className={classNames(
           'courseItem__button', {
-            'courseItem__button--added': course.id === actualCourse,
+            'courseItem__button--added': id === actualCourse,
           },
         )}
-        to={`/courses/${course.meta.slug}`}
-        onClick={() => dispatch(actualCourseActions.setActualCourse(course.id))}
+        to={`/courses/${meta.slug}`}
+        onClick={() => dispatch(actualCourseActions.setActualCourse(id))}
       >
-        {course.id === actualCourse
+        {id === actualCourse
           ? 'Continue'
           : 'Start Course'}
       </Link>

@@ -7,6 +7,7 @@ import { NotFoundPage } from './components/NotFoundPage';
 import { NotImplementedPage } from './components/NotImplementedPage';
 import { CoursePage } from './components/CoursePage/CoursePage';
 import { Footer, Header } from './components';
+import { NetworkError } from './components/NetworkError/NetworkError';
 import './App.scss';
 
 export const App: React.FC = () => {
@@ -50,6 +51,8 @@ export const App: React.FC = () => {
       </Routes>
 
       <Footer />
+
+      <NetworkError />
     </div>
   );
 };

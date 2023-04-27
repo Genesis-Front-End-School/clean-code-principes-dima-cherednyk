@@ -1,3 +1,5 @@
+import { CourseMeta } from './CourseMeta';
+
 export interface Course {
   id: string,
   title: string,
@@ -10,13 +12,5 @@ export interface Course {
   containsLockedLessons: boolean,
   previewImageLink: string,
   rating: number,
-  meta: {
-    slug: string,
-    skills: string[],
-    courseVideoPreview: {
-      link: string,
-      duration: number,
-      previewImageLink: string,
-    }
-  },
+  meta: CourseMeta,
 }
