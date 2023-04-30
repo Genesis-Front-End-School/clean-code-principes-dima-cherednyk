@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { actions as actualCourseActions } from '../../features/actualCourse';
-import './CourseItem.scss';
 import { CourseMeta } from '../../types/CourseMeta';
+import './CourseItem.scss';
 
 type Props = {
   title: string,
@@ -45,7 +45,7 @@ export const CourseItem: React.FC<Props> = (
             <p className="courseItem__skills">Skills:</p>
 
             <ul className="courseItem__skillsList">
-              {meta.skills.map(skill => (
+              {meta.skills.map((skill: string) => (
                 <li className="courseItem__skillItem" key={skill}>{skill}</li>
               ))}
             </ul>

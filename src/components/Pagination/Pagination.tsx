@@ -18,17 +18,17 @@ export const Pagination: React.FC<Props> = ({ coursesAmount }) => {
       / coursesPerPage) + 1)
     .keys()).slice(1);
 
-  const updatePage = (newPage: string | null) => {
+  const updatePage = (newPage: string | null): void => {
     return setSearchParams(getSearchWith(searchParams, {
       page: newPage,
     }));
   };
 
-  const prevPage = () => {
+  const prevPage = (): void => {
     return updatePage(page && String(+page - 1));
   };
 
-  const nextPage = () => {
+  const nextPage = (): void => {
     return updatePage(!page ? '2' : String(+page + 1));
   };
 

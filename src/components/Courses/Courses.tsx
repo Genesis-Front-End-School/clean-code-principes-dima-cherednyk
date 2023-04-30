@@ -6,6 +6,7 @@ import { Loader } from '../Loader/Loader';
 import { Pagination } from '../Pagination';
 import { UseCourses } from './hooks/UseCourses';
 import { visibleCourses } from './visibleCourses';
+import { Course } from '../../types/Course';
 import './Courses.scss';
 
 export const Courses: React.FC = () => {
@@ -27,7 +28,7 @@ export const Courses: React.FC = () => {
 
                   <div className="courses__main">
                     <ul className="courses__list">
-                      {visibleCourses(courses, page).map(course => (
+                      {visibleCourses(courses, page).map((course: Course) => (
                         <li key={course.id}>
                           <CourseItem
                             title={course.title}

@@ -25,19 +25,23 @@ export const ActiveCourse: React.FC<Props> = (
   const activeLesson = lessons.find(item => item.order === 1)?.link;
   const dispatch = useAppDispatch();
 
-  const lockedLessonMessage = (lessonId: string) => {
+  const lockedLessonMessage = (lessonId: string): void => {
     setLockedMessage(true);
     setLockedLesonId(lessonId);
 
-    setTimeout(() => {
+    setTimeout((): void => {
       setLockedLesonId('');
       setLockedMessage(false);
     }, 5000);
   };
 
-  const checkVideo = () => {
-    return lessons.some(item => item.link === actualLesson?.link)
-      ? actualLesson?.link
+  const checkVideo = (): string | null => {
+    if (!actualLesson) {
+      return null;
+    }
+
+    return lessons.some((item: Lesson): boolean => item.link === actualLesson.link)
+      ? actualLesson.link
       : null;
   };
 
@@ -65,49 +69,50 @@ export const ActiveCourse: React.FC<Props> = (
         <p>Lessons:</p>
 
         <ul className="activeCourse__lessons">
-          {lessons.sort((a, b) => a.order - b.order).map(lesson => (
-            <li className="activeCourse__lesson" key={lesson.id}>
-              <button
-                className={classNames(
-                  'activeCourse__button', {
-                    'activeCourse__button--locked': lesson.status === 'locked',
-                  },
+          {lessons.sort((a: Lesson, b: Lesson): number => a.order - b.order)
+            .map((lesson: Lesson) => (
+              <li className="activeCourse__lesson" key={lesson.id}>
+                <button
+                  className={classNames(
+                    'activeCourse__button', {
+                      'activeCourse__button--locked': lesson.status === 'locked',
+                    },
+                  )}
+                  type="button"
+                  onClick={() => {
+                    return lesson.status === 'locked'
+                      ? lockedLessonMessage(lesson.id)
+                      : dispatch(actualLessonActions.setActualLesson(lesson));
+                  }}
+                >
+                  {`${lesson.order}. ${lesson.title}`}
+
+                  {lockedMessage && lockedLessonId === lesson.id && (
+                    <div className="activeCourse__lockedMessage">
+                      <p>
+                        Complete all required and all optional quests on the topic to unlock video.
+                      </p>
+                    </div>
+                  )}
+                </button>
+
+                {!checkVideo() && lesson.order === 1 && lesson.link && (
+                  <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
                 )}
-                type="button"
-                onClick={() => {
-                  return lesson.status === 'locked'
-                    ? lockedLessonMessage(lesson.id)
-                    : dispatch(actualLessonActions.setActualLesson(lesson));
-                }}
-              >
-                {`${lesson.order}. ${lesson.title}`}
 
-                {lockedMessage && lockedLessonId === lesson.id && (
-                  <div className="activeCourse__lockedMessage">
-                    <p>
-                      Complete all required and all optional quests on the topic to unlock video.
-                    </p>
-                  </div>
+                {actualLesson?.link && checkVideo() === lesson.link && (
+                  <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
                 )}
-              </button>
 
-              {!checkVideo() && lesson.order === 1 && lesson.link && (
-                <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
-              )}
+                {!lesson.link && actualLesson?.previewImageLink === lesson.previewImageLink && (
+                  <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
+                )}
 
-              {actualLesson?.link && checkVideo() === lesson.link && (
-                <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
-              )}
-
-              {!lesson.link && actualLesson?.previewImageLink === lesson.previewImageLink && (
-                <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
-              )}
-
-              {actualLesson?.link && actualLesson?.link === lesson.link && (
-                <p className="activeCourse__activeLesson">Last video</p>
-              )}
-            </li>
-          ))}
+                {actualLesson?.link && actualLesson?.link === lesson.link && (
+                  <p className="activeCourse__activeLesson">Last video</p>
+                )}
+              </li>
+            ))}
         </ul>
       </div>
     </div>
