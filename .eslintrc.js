@@ -2,8 +2,10 @@ module.exports = {
   extends: [
     '@mate-academy/eslint-config-react-typescript',
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
   ],
   rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.ts', 'jsx', 'js'] }],
     // React
     'react/prop-types': 0,
     'react/self-closing-comp': 0,
@@ -25,4 +27,7 @@ module.exports = {
   plugins: [
     '@typescript-eslint',
   ],
+  env: {
+    jest: true,
+  },
 };

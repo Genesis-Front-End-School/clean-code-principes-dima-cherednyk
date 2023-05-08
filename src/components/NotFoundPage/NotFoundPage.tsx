@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { BackButton } from '../BackButton';
 import './NotFoundPage.scss';
 
 export const NotFoundPage: React.FC = () => {
   return (
     <div className="container">
+      <BackButton />
+
       <div className="notFoundPage">
         <h2 className="notFoundPage__title">Ooops!</h2>
 

@@ -4,18 +4,20 @@ import { CourseItem } from '../CourseItem/CourseItem';
 import { Error } from '../Error';
 import { Loader } from '../Loader/Loader';
 import { Pagination } from '../Pagination';
-import { UseCourses } from './hooks/UseCourses';
-import { visibleCourses } from './visibleCourses';
 import { Course } from '../../types/Course';
 import './Courses.scss';
+import { visibleCourses } from './visibleCourses';
+import { UseCourses } from './hooks/UseCourses';
 
 export const Courses: React.FC = () => {
   const [seachParams] = useSearchParams();
   const page = seachParams.get('page' || '');
-  const { courses, loading, error } = UseCourses();
+  const { loading, courses, error } = UseCourses();
 
   return (
     <div className="courses">
+      <h1 className="courses__title">Courses</h1>
+
       {loading
         ? <Loader />
         : (
@@ -24,8 +26,6 @@ export const Courses: React.FC = () => {
               ? <Error />
               : (
                 <>
-                  <h1 className="courses__title">Courses</h1>
-
                   <div className="courses__main">
                     <ul className="courses__list">
                       {visibleCourses(courses, page).map((course: Course) => (

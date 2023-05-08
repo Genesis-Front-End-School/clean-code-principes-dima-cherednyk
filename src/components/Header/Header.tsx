@@ -7,7 +7,7 @@ export const Header: React.FC = () => {
   return (
     <nav className="navbar">
       <Link to="/courses" className="navbar__logo">
-        <img src="./img/logo.svg" alt="logo" className="logo" />
+        <img src="./img/logo.svg" alt="headerLogo" className="logo" />
       </Link>
 
       <div className="navbar__list">
