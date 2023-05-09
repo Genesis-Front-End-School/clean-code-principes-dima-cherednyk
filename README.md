@@ -1,7 +1,7 @@
 # Layers
 ### Layers schema
 
-<img src='./public/img/Layers.png' title="Layer schema" alt="Layer schema" />
+<img src='./public/img/LayersSchema.png' title="Layer schema" alt="Layer schema" />
 
 ## I distinguish my project into the 3 following layers:
 - View;
