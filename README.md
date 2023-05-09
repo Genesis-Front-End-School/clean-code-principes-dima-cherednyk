@@ -18,10 +18,10 @@ Presentation sublayer: This layer contains simple components that accept data an
 Structural sublayer: This layer includes such components as pages. They also accept data and have no business logic and no access to Redux store and API. They have responsible for the structure.
 Container sublayer: This layer interacts with the API and the Redux stote. He interacts with Application layer using hooks.
 
-### The Application layer
+### The Application layer:
 
 This layer includes hooks that establish communication between View Layer and Infrastruture Layer.
 
-### The Infrastructure layer.
+### The Infrastructure layer:
 
 This layer is responsible for interacting with the server and saving data to the local storage and Redux store.
