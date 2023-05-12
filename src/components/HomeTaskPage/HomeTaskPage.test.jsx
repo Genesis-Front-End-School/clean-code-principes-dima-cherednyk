@@ -13,7 +13,9 @@ describe('HomeTaskPage', () => {
     beforeEach(() => {
       render(
         <MemoryRouter>
-          <HomeTaskPage />
+          <Provider store={store}>
+            <HomeTaskPage />
+          </Provider>
         </MemoryRouter>,
       );
     });

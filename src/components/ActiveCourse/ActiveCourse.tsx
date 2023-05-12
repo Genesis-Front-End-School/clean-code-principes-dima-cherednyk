@@ -23,6 +23,7 @@ export const ActiveCourse: React.FC<Props> = (
   const [lockedLessonId, setLockedLesonId] = useState<string>('');
   const { actualLesson } = useAppSelector(state => state.actualLesson);
   const activeLesson = lessons.find(item => item.order === 1)?.link;
+  const { darkMode } = useAppSelector(state => state.darkMode);
   const dispatch = useAppDispatch();
 
   const lockedLessonMessage = (lessonId: string): void => {
@@ -76,6 +77,7 @@ export const ActiveCourse: React.FC<Props> = (
                   className={classNames(
                     'activeCourse__button', {
                       'activeCourse__button--locked': lesson.status === 'locked',
+                      darkMode,
                     },
                   )}
                   type="button"
@@ -97,15 +99,27 @@ export const ActiveCourse: React.FC<Props> = (
                 </button>
 
                 {!checkVideo() && lesson.order === 1 && lesson.link && (
-                  <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
+                  <img
+                    className="activeCourse__isPlaying"
+                    src={darkMode ? './img/play-buttonWhite.svg' : './img/play-button.svg'}
+                    alt="play"
+                  />
                 )}
 
                 {actualLesson?.link && checkVideo() === lesson.link && (
-                  <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
+                  <img
+                    className="activeCourse__isPlaying"
+                    src={darkMode ? './img/play-buttonWhite.svg' : './img/play-button.svg'}
+                    alt="play"
+                  />
                 )}
 
                 {!lesson.link && actualLesson?.previewImageLink === lesson.previewImageLink && (
-                  <img className="activeCourse__isPlaying" src="./img/play-button.svg" alt="play" />
+                  <img
+                    className="activeCourse__isPlaying"
+                    src={darkMode ? './img/play-buttonWhite.svg' : './img/play-button.svg'}
+                    alt="play"
+                  />
                 )}
 
                 {actualLesson?.link && actualLesson?.link === lesson.link && (

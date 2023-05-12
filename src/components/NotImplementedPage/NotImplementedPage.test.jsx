@@ -13,7 +13,9 @@ describe('NotImplementedPage', () => {
     beforeEach(() => {
       render(
         <MemoryRouter>
-          <NotImplementedPage />
+          <Provider store={store}>
+            <NotImplementedPage />
+          </Provider>
         </MemoryRouter>,
       );
     });

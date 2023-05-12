@@ -13,11 +13,13 @@ import storage from 'redux-persist/lib/storage';
 import actualCourseReducer from '../features/actualCourse';
 import actualLessonReducer from '../features/actualLesson';
 import coursesReducer from '../features/courses';
+import darkModeReducer from '../features/darkMode';
 
 const rootReducer = combineReducers({
   actualCourse: actualCourseReducer,
   courses: coursesReducer,
   actualLesson: actualLessonReducer,
+  darkMode: darkModeReducer,
 });
 const persistConfig = {
   key: 'root',

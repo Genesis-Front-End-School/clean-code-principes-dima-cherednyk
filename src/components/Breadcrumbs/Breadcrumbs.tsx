@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
 import './Breadcrumbs.scss';
 
 type Props = {
@@ -7,10 +8,14 @@ type Props = {
 };
 
 export const Breadcrumbs: React.FC<Props> = ({ activeCourseTitle }) => {
+  const { darkMode } = useAppSelector(state => state.darkMode);
+
   return (
     <div className="breadcrumbs" data-cy="breadCrumbs">
       <Link to="/" className="breadcrumbs__link">
-        <img src="./img/home.svg" alt="home" className="icon" />
+        {darkMode
+          ? <img src="./img/homeWhite.svg" alt="home" className="icon" />
+          : <img src="./img/home.svg" alt="home" className="icon" />}
       </Link>
 
       <img

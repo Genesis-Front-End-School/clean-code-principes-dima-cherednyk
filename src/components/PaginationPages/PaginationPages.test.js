@@ -12,7 +12,9 @@ describe('PaginationPages', () => {
     it('renders PaginationPages component', () => {
       render(
         <MemoryRouter>
-          <PaginationPages pages={[1, 2, 3]} />
+          <Provider store={store}>
+            <PaginationPages pages={[1, 2, 3]} />
+          </Provider>
         </MemoryRouter>,
       );
 

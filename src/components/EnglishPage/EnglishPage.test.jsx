@@ -13,7 +13,9 @@ describe('EnglishPage', () => {
     beforeEach(() => {
       render(
         <MemoryRouter>
-          <EnglishPage />
+          <Provider store={store}>
+            <EnglishPage />
+          </Provider>
         </MemoryRouter>,
       );
     });

@@ -12,7 +12,9 @@ describe('Header', () => {
   describe('should render component', () => {
     render(
       <MemoryRouter>
-        <Header />
+        <Provider store={store}>
+          <Header />
+        </Provider>
       </MemoryRouter>,
     );
 

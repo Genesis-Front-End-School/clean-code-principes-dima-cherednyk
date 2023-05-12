@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import classNames from 'classnames';
 import { CoursesPage } from './components/CoursesPage/CoursesPage';
 import { EnglishPage } from './components/EnglishPage/EnglishPage';
 import { HomeTaskPage } from './components/HomeTaskPage/HomeTaskPage';
@@ -7,11 +8,19 @@ import { NotFoundPage } from './components/NotFoundPage';
 import { NotImplementedPage } from './components/NotImplementedPage';
 import { CoursePage } from './components/CoursePage/CoursePage';
 import { Footer, Header } from './components';
+import { useAppSelector } from './app/hooks';
 import './App.scss';
 
 export const App: React.FC = () => {
+  const { darkMode } = useAppSelector(state => state.darkMode);
+
   return (
-    <div className="App">
+    <div className={classNames(
+      'App', {
+        darkMode,
+      },
+    )}
+    >
       <Header />
 
       <Routes>

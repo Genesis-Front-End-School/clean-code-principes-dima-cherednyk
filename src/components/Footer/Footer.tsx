@@ -1,15 +1,20 @@
 import React from 'react';
+import classNames from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
 import './Footer.scss';
 
 export const Footer: React.FC = () => {
+  const { darkMode } = useAppSelector(state => state.darkMode);
   const location = useLocation();
 
   return (
     <div className="footer">
       <div className="footer__content">
         <Link to="/courses" className="footer__logo">
-          <img src="./img/logo.svg" alt="footerLogo" className="logo" />
+          {darkMode
+            ? <img src="./img/logoWhite.svg" alt="footerLogo" className="logo" />
+            : <img src="./img/logo.svg" alt="footerLogo" className="logo" />}
         </Link>
 
         <div className="footer__list">
@@ -36,10 +41,18 @@ export const Footer: React.FC = () => {
 
           <button
             type="button"
-            className="footer__button"
+            className={
+              classNames(
+                'footer__button', {
+                  darkMode,
+                },
+              )
+            }
             onClick={() => window.scrollTo(0, 0)}
           >
-            <img src="./img/arrowUp.svg" alt="up" />
+            {darkMode
+              ? <img src="./img/arrowUpWhite.svg" alt="up" />
+              : <img src="./img/arrowUp.svg" alt="up" />}
           </button>
         </div>
       </div>

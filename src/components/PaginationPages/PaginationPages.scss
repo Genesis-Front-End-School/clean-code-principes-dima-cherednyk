@@ -23,9 +23,14 @@
       border: 1px solid #313237;
     }
 
+    &--dark {
+      color: white;
+      background-color: #313237;
+    }
+
     &--isActive {
       border: none;
-      background: #313237;
+      background: rgb(115, 189, 137);
       color: white;
     }
   }

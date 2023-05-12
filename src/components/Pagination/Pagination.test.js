@@ -3,14 +3,18 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
 import { Pagination } from './Pagination';
+import store from '../../app/store';
 
 describe('Pagination', () => {
   describe('should render component', () => {
     beforeEach(() => {
       render(
         <MemoryRouter initialEntries={['/courses']}>
-          <Pagination coursesAmount={30} />
+          <Provider store={store}>
+            <Pagination coursesAmount={30} />
+          </Provider>
         </MemoryRouter>,
       );
     });
@@ -45,7 +49,9 @@ describe('Pagination', () => {
     beforeEach(() => {
       render(
         <MemoryRouter initialEntries={['/courses?page=2']}>
-          <Pagination coursesAmount={30} />
+          <Provider store={store}>
+            <Pagination coursesAmount={30} />
+          </Provider>
         </MemoryRouter>,
       );
     });

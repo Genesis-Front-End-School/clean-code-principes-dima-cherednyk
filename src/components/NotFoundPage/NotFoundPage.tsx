@@ -1,18 +1,38 @@
 import React from 'react';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../app/hooks';
 import { BackButton } from '../BackButton';
 import './NotFoundPage.scss';
 
 export const NotFoundPage: React.FC = () => {
+  const { darkMode } = useAppSelector(state => state.darkMode);
+
   return (
     <div className="container">
       <BackButton />
 
       <div className="notFoundPage">
-        <h2 className="notFoundPage__title">Ooops!</h2>
+        <h2
+          className={
+            classNames(
+              'notFoundPage__title', {
+                darkMode,
+              },
+            )
+          }
+        >
+          Ooops!
+        </h2>
 
         <p
-          className="notFoundPage__message"
+          className={
+            classNames(
+              'notFoundPage__message', {
+                darkMode,
+              },
+            )
+          }
         >
           Page not found
         </p>
