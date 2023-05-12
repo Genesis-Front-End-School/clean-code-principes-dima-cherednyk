@@ -2,6 +2,7 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';
 import { getSearchWith } from '../../utils/searchHelper';
+import { useAppSelector } from '../../app/hooks';
 import './PaginationPages.scss';
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 export const PaginationPages: React.FC<Props> = ({ pages }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page' || '');
+  const { darkMode } = useAppSelector(state => state.darkMode);
 
   const setPage = (pageNumber: string): void => {
     setSearchParams(getSearchWith(searchParams, {
@@ -28,6 +30,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
               className={classNames(
                 'paginationPages__page', {
                   'paginationPages__page--isActive': !page || page === '1',
+                  'paginationPages__page--dark': darkMode,
                 },
               )}
               onClick={() => setPage('1')}
@@ -41,6 +44,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                   className={classNames(
                     'paginationPages__page', {
                       'paginationPages__page--isActive': page && +page === n,
+                      'paginationPages__page--dark': darkMode,
                     },
                   )}
                   key={n}
@@ -60,6 +64,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                 'paginationPages__page', {
                   'paginationPages__page--isActive':
                   !page || (page && page === '1'),
+                  'paginationPages__page--dark': darkMode,
                 },
               )}
               onClick={() => setPage('1')}
@@ -81,6 +86,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                 'paginationPages__page', {
                   'paginationPages__page--isActive':
                   page && page !== '1' && +page !== pages.length,
+                  'paginationPages__page--dark': darkMode,
                 },
               )}
               onClick={(e) => setPage(e.currentTarget.innerText)}
@@ -113,6 +119,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                 'paginationPages__page', {
                   'paginationPages__page--isActive':
                   page && +page === pages.length,
+                  'paginationPages__page--dark': darkMode,
                 },
               )}
               onClick={() => setPage(String(pages.length))}

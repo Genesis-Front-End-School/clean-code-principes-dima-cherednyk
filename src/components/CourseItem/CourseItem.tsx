@@ -25,6 +25,7 @@ export const CourseItem: React.FC<Props> = (
     id,
   },
 ) => {
+  const { darkMode } = useAppSelector(state => state.darkMode);
   const actualCourse = useAppSelector(state => state.actualCourse);
   const dispatch = useAppDispatch();
 
@@ -32,9 +33,27 @@ export const CourseItem: React.FC<Props> = (
     <div className="courseItem">
       <img className="courseItem__image" src={`${previewImageLink}/cover.webp`} alt="product" />
 
-      <h4 className="courseItem__name">{title}</h4>
+      <h4
+        className={
+          classNames(
+            'courseItem__name', {
+              darkMode,
+            },
+          )
+        }
+      >
+        {title}
+      </h4>
 
-      <div className="courseItem__info">
+      <div
+        className={
+          classNames(
+            'courseItem__info', {
+              darkMode,
+            },
+          )
+        }
+      >
         <p>{`Lessons: ${lessonsCount}`}</p>
         <p>{`Rating: ${rating}/5`}</p>
       </div>
@@ -42,9 +61,27 @@ export const CourseItem: React.FC<Props> = (
       {meta.skills
         ? (
           <>
-            <p className="courseItem__skills">Skills:</p>
+            <p
+              className={
+                classNames(
+                  'courseItem__skills', {
+                    darkMode,
+                  },
+                )
+              }
+            >
+              Skills:
+            </p>
 
-            <ul className="courseItem__skillsList">
+            <ul
+              className={
+                classNames(
+                  'courseItem__skillsList', {
+                    darkMode,
+                  },
+                )
+              }
+            >
               {meta.skills.map((skill: string) => (
                 <li className="courseItem__skillItem" key={skill}>{skill}</li>
               ))}

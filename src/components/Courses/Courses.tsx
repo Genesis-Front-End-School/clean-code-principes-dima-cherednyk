@@ -1,22 +1,35 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
+import classNames from 'classnames';
 import { CourseItem } from '../CourseItem/CourseItem';
 import { Error } from '../Error';
 import { Loader } from '../Loader/Loader';
 import { Pagination } from '../Pagination';
 import { Course } from '../../types/Course';
-import './Courses.scss';
 import { visibleCourses } from './visibleCourses';
+import { useAppSelector } from '../../app/hooks';
 import { UseCourses } from './hooks/UseCourses';
+import './Courses.scss';
 
 export const Courses: React.FC = () => {
   const [seachParams] = useSearchParams();
   const page = seachParams.get('page' || '');
   const { loading, courses, error } = UseCourses();
+  const { darkMode } = useAppSelector(state => state.darkMode);
 
   return (
     <div className="courses">
-      <h1 className="courses__title">Courses</h1>
+      <h1
+        className={
+          classNames(
+            'courses__title', {
+              darkMode,
+            },
+          )
+        }
+      >
+        Courses
+      </h1>
 
       {loading
         ? <Loader />

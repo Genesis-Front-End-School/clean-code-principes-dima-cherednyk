@@ -13,7 +13,9 @@ describe('NotFoundPage', () => {
     beforeEach(() => {
       render(
         <MemoryRouter>
-          <NotFoundPage />
+          <Provider store={store}>
+            <NotFoundPage />
+          </Provider>
         </MemoryRouter>,
       );
     });

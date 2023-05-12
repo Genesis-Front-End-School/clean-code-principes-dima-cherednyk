@@ -14,7 +14,9 @@ describe('Footer', () => {
   describe('should render component', () => {
     render(
       <MemoryRouter>
-        <Footer />
+        <Provider store={store}>
+          <Footer />
+        </Provider>
       </MemoryRouter>,
     );
 

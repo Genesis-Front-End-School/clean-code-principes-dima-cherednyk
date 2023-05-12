@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../utils/searchHelper';
 import { PaginationPages } from '../PaginationPages';
 import { coursesPerPage } from '../Courses/visibleCourses';
+import { useAppSelector } from '../../app/hooks';
 import './Pagination.scss';
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 };
 
 export const Pagination: React.FC<Props> = ({ coursesAmount }) => {
+  const { darkMode } = useAppSelector(state => state.darkMode);
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page' || '');
   const pages = Array.from(Array(Math
@@ -38,6 +40,7 @@ export const Pagination: React.FC<Props> = ({ coursesAmount }) => {
         className={classNames(
           'pagination__button', {
             'pagination__button--disabled': !page || (page && page === '1'),
+            darkMode,
           },
         )}
         type="button"
@@ -46,10 +49,10 @@ export const Pagination: React.FC<Props> = ({ coursesAmount }) => {
         data-cy="paginationLeft"
       >
         {page && page !== '1'
-          ? (<img src="./img/arrowLeft.svg" alt="prevPage" />)
+          ? (<img src={darkMode ? './img/arrowLeftWhite.svg' : './img/arrowLeft.svg'} alt="prevPage" />)
           : (
             <img
-              src="./img/arrowLeftDisabled.svg"
+              src={darkMode ? './img/arrowLeft.svg' : './img/arrowLeftDisabled.svg'}
               alt="prevPageDisabled"
             />
           )}
@@ -61,6 +64,7 @@ export const Pagination: React.FC<Props> = ({ coursesAmount }) => {
         className={classNames(
           'pagination__button', {
             'pagination__button--disabled': page && +page === pages.length,
+            darkMode,
           },
         )}
         type="button"
@@ -69,10 +73,10 @@ export const Pagination: React.FC<Props> = ({ coursesAmount }) => {
         data-cy="paginationRight"
       >
         {!page || +page !== pages.length
-          ? (<img src="./img/arrowRight.svg" alt="nextPage" />)
+          ? (<img src={darkMode ? './img/arrowRightWhite.svg' : './img/arrowRight.svg'} alt="nextPage" />)
           : (
             <img
-              src="./img/arrowRightDisabled.svg"
+              src={darkMode ? './img/arrowRight.svg' : './img/arrowRightDisabled.svg'}
               alt="nextPageDisabled"
             />
           )}
