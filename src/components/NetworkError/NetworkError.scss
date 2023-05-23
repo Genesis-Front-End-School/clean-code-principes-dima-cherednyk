@@ -1,0 +1,31 @@
+.networkError {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  height: 250px;
+  width: 350px;
+  background-color: rgb(230, 250, 47);
+  border: 1px solid #e2e6e9;
+  padding: 0 25px;
+
+  &__title {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 41px;
+    letter-spacing: -0.01em;
+    color: #313237;
+    margin-bottom: 40px;
+  }
+
+  &__message {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    color: #313237;
+    margin-bottom: 25px;
+  }
+}

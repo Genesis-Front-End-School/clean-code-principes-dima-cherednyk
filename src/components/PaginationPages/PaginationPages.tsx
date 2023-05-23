@@ -33,7 +33,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
               1
             </button>
             {
-              (pages.slice(1)).map(n => (
+              (pages.slice(1)).map((n: number) => (
                 <button
                   type="button"
                   className={classNames(

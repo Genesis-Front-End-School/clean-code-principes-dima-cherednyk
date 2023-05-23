@@ -3,27 +3,32 @@ import classNames from 'classnames';
 import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../utils/searchHelper';
 import { PaginationPages } from '../PaginationPages';
+import { coursesPerPage } from '../Courses/visibleCourses';
 import './Pagination.scss';
 
 type Props = {
-  pages: number[];
+  coursesAmount: number;
 };
 
-export const Pagination: React.FC<Props> = ({ pages }) => {
+export const Pagination: React.FC<Props> = ({ coursesAmount }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page' || '');
+  const pages = Array.from(Array(Math
+    .ceil(coursesAmount
+      / coursesPerPage) + 1)
+    .keys()).slice(1);
 
-  const updatePage = (newPage: string | null) => {
+  const updatePage = (newPage: string | null): void => {
     return setSearchParams(getSearchWith(searchParams, {
       page: newPage,
     }));
   };
 
-  const prevPage = () => {
+  const prevPage = (): void => {
     return updatePage(page && String(+page - 1));
   };
 
-  const nextPage = () => {
+  const nextPage = (): void => {
     return updatePage(!page ? '2' : String(+page + 1));
   };
 

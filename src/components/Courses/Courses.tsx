@@ -1,28 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import * as coursesActions from '../../features/courses';
 import { CourseItem } from '../CourseItem/CourseItem';
 import { Error } from '../Error';
 import { Loader } from '../Loader/Loader';
 import { Pagination } from '../Pagination';
+import { UseCourses } from './hooks/UseCourses';
+import { visibleCourses } from './visibleCourses';
+import { Course } from '../../types/Course';
 import './Courses.scss';
 
 export const Courses: React.FC = () => {
   const [seachParams] = useSearchParams();
   const page = seachParams.get('page' || '');
-  const { courses, loading, error } = useAppSelector(state => state.courses);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(coursesActions.init());
-  }, []);
-
-  const perPage = 10;
-  const pages = Array.from(Array(Math
-    .ceil(courses.length
-      / perPage) + 1)
-    .keys()).slice(1);
+  const { courses, loading, error } = UseCourses();
 
   return (
     <div className="courses">
@@ -38,21 +28,22 @@ export const Courses: React.FC = () => {
 
                   <div className="courses__main">
                     <ul className="courses__list">
-                      {courses.slice(
-                        (!page
-                          ? 0
-                          : (+page - 1) * perPage),
-                        (perPage * (!page ? 1 : +page)),
-                      )
-                        .map(course => (
-                          <li key={course.id}>
-                            <CourseItem course={course} />
-                          </li>
-                        ))}
+                      {visibleCourses(courses, page).map((course: Course) => (
+                        <li key={course.id}>
+                          <CourseItem
+                            title={course.title}
+                            lessonsCount={course.lessonsCount}
+                            previewImageLink={course.previewImageLink}
+                            rating={course.rating}
+                            meta={course.meta}
+                            id={course.id}
+                          />
+                        </li>
+                      ))}
                     </ul>
                   </div>
 
-                  <Pagination pages={pages} />
+                  <Pagination coursesAmount={courses.length} />
                 </>
               )}
           </>
