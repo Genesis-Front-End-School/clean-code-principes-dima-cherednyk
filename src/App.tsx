@@ -10,6 +10,7 @@ import { CoursePage } from './components/CoursePage/CoursePage';
 import { Footer, Header } from './components';
 import { useAppSelector } from './app/hooks';
 import './App.scss';
+import '../node_modules/app-firstnpmlibrary/dist/index.css';
 
 export const App: React.FC = () => {
   const { darkMode } = useAppSelector(state => state.darkMode);
