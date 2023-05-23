@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import classNames from 'classnames';
+import { Loader } from 'app-firstnpmlibrary';
 import { CourseItem } from '../CourseItem/CourseItem';
 import { Error } from '../Error';
-import { Loader } from '../Loader/Loader';
 import { Pagination } from '../Pagination';
 import { Course } from '../../types/Course';
 import { visibleCourses } from './visibleCourses';

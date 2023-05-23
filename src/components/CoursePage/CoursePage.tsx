@@ -1,8 +1,8 @@
 import React from 'react';
+import { Loader } from 'app-firstnpmlibrary';
 import { BackButton } from '../BackButton';
 import { Error } from '../Error';
 import { ActiveCourse } from '../ActiveCourse/ActiveCourse';
-import { Loader } from '../Loader';
 import { Breadcrumbs } from '../Breadcrumbs/Breadcrumbs';
 import { UseActiveCourse } from './hooks/UseActiveCourse';
 

@@ -15,4 +15,3 @@ export { PageNavLink } from './PageNavLink';
 export { Pagination } from './Pagination';
 export { PaginationPages } from './PaginationPages';
 export { Breadcrumbs } from './Breadcrumbs';
-export { Loader } from './Loader';
