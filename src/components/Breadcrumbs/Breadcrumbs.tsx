@@ -18,7 +18,7 @@ export const Breadcrumbs: React.FC<Props> = ({ activeCourseTitle }) => {
         alt="arrowLeft"
       />
 
-      <p className="breadcrumbs__activeProduct">
+      <p className="breadcrumbs__activeProduct" title="activeCourseTitle">
         {activeCourseTitle}
       </p>
     </div>

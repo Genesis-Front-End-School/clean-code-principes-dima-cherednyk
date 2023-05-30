@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
     <div className="footer">
       <div className="footer__content">
         <Link to="/courses" className="footer__logo">
-          <img src="./img/logo.svg" alt="logo" className="logo" />
+          <img src="./img/logo.svg" alt="footerLogo" className="logo" />
         </Link>
 
         <div className="footer__list">

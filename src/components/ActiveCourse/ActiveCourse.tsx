@@ -32,7 +32,7 @@ export const ActiveCourse: React.FC<Props> = (
     setTimeout((): void => {
       setLockedLesonId('');
       setLockedMessage(false);
-    }, 5000);
+    }, 1000);
   };
 
   const checkVideo = (): string | null => {

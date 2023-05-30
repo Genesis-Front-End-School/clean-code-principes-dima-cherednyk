@@ -12,6 +12,12 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page' || '');
 
+  const setPage = (pageNumber: string): void => {
+    setSearchParams(getSearchWith(searchParams, {
+      page: pageNumber,
+    }));
+  };
+
   return (
     <div className="paginationPages">
       {pages.length < 5
@@ -24,11 +30,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                   'paginationPages__page--isActive': !page || page === '1',
                 },
               )}
-              onClick={() => {
-                setSearchParams(getSearchWith(searchParams, {
-                  page: '1',
-                }));
-              }}
+              onClick={() => setPage('1')}
             >
               1
             </button>
@@ -42,11 +44,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                     },
                   )}
                   key={n}
-                  onClick={() => {
-                    setSearchParams(getSearchWith(searchParams, {
-                      page: String(n),
-                    }));
-                  }}
+                  onClick={() => setPage(String(n))}
                 >
                   {n}
                 </button>
@@ -64,11 +62,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                   !page || (page && page === '1'),
                 },
               )}
-              onClick={() => {
-                setSearchParams(getSearchWith(searchParams, {
-                  page: '1',
-                }));
-              }}
+              onClick={() => setPage('1')}
             >
               1
             </button>
@@ -89,13 +83,8 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                   page && page !== '1' && +page !== pages.length,
                 },
               )}
-              onClick={(e) => {
-                setSearchParams(getSearchWith(searchParams, {
-                  page: e.currentTarget.innerText,
-                }));
-              }}
+              onClick={(e) => setPage(e.currentTarget.innerText)}
             >
-
               {(!page || page === '1') && (
                 2
               )}
@@ -126,11 +115,7 @@ export const PaginationPages: React.FC<Props> = ({ pages }) => {
                   page && +page === pages.length,
                 },
               )}
-              onClick={() => {
-                setSearchParams(getSearchWith(searchParams, {
-                  page: String(pages.length),
-                }));
-              }}
+              onClick={() => setPage(String(pages.length))}
             >
               {pages.length}
             </button>
